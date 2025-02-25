@@ -30,7 +30,7 @@ if [[ $line =~ "PING" ]]; then
 fi
 regex='^:([^!]*)!([^@]*)@([^ ]*) ([^ ]*) ([^ ]*) :(.*)'
 # extracting nickname, channel name and message from the input
-[[ $line =~ $regex ]] || echo "Something weird happened" >> log;
+if ! [[ $line =~ $regex ]]; then echo "Something weird happened" >> log; continue; fi
 SENDER_NICKNAME="${BASH_REMATCH[1]}"
 TARGET="${BASH_REMATCH[5]}"
 MESSAGE="${BASH_REMATCH[6]}"
